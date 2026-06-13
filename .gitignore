@@ -15,3 +15,6 @@ desktop.ini
 # Copias de seguridad
 *.bak
 *.sql.bak
+
+# Claves secretas (API) — NUNCA subir a GitHub
+includes/api_config.php
