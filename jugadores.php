@@ -2,6 +2,7 @@
 require "includes/conexion.php";
 
 
+
 $busqueda = "%" . ($_GET["buscar"] ?? "") . "%";
 
 $stmt = $conexion->prepare(

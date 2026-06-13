@@ -1,5 +1,7 @@
 <?php
 require "includes/conexion.php";
+require "includes/sesion.php";
+requerirLogin();
 
 $id = $_GET["id"];
 

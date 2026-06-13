@@ -1,5 +1,7 @@
 <?php
 require "includes/conexion.php";
+require "includes/sesion.php";
+requerirLogin();
 
 // Equipos para el desplegable
 $listaEquipos = $conexion->query("SELECT id_equipo, nombre FROM equipos ORDER BY nombre");
