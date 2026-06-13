@@ -189,14 +189,14 @@ else                       $veredicto = "Descartado";
         <select name="jugador" required>
             <option value="">-- Elige jugador --</option>
             <?php while ($j = $listaJugadores->fetch_assoc()): ?>
-            <option value="<?= $j["id_jugador"] ?>"><?= $j["nombre"] ?></option>
+            <option value="<?= $j["id_jugador"] ?>"><?= htmlspecialchars($j["nombre"]) ?></option>
             <?php endwhile; ?>
         </select>
 
         <select name="equipo" required>
             <option value="">-- Elige club --</option>
             <?php while ($e = $listaEquipos->fetch_assoc()): ?>
-            <option value="<?= $e["id_equipo"] ?>"><?= $e["nombre"] ?></option>
+            <option value="<?= $e["id_equipo"] ?>"><?= htmlspecialchars($e["nombre"]) ?></option>
             <?php endwhile; ?>
         </select>
 
@@ -204,7 +204,7 @@ else                       $veredicto = "Descartado";
     </form>
 
     <?php if ($resultado !== null): ?>
-        <h2><?= $jugador["nombre"] ?> → <?= $equipo["nombre"] ?></h2>
+        <h2><?= htmlspecialchars($jugador["nombre"]) ?> → <?= htmlspecialchars($equipo["nombre"]) ?></h2>
         <p style="font-size: 48px; margin: 10px 0;"><strong><?= $resultado ?>%</strong></p>
         <p><strong><?= $veredicto ?></strong></p>
 

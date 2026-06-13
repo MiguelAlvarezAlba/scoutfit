@@ -67,7 +67,7 @@ if (isset($_GET["equipo"]) && $_GET["equipo"] != "") {
             <option value="">-- Elige club --</option>
             <?php while ($e = $listaEquipos->fetch_assoc()): ?>
             <option value="<?= $e["id_equipo"] ?>" <?= ($equipo && $equipo["id_equipo"] == $e["id_equipo"]) ? "selected" : "" ?>>
-                <?= $e["nombre"] ?>
+                <?= htmlspecialchars($e["nombre"]) ?>
             </option>
             <?php endwhile; ?>
         </select>
@@ -75,7 +75,7 @@ if (isset($_GET["equipo"]) && $_GET["equipo"] != "") {
     </form>
 
     <?php if ($equipo): ?>
-        <h2>Jugadores que mejor encajan en <?= $equipo["nombre"] ?></h2>
+        <h2>Jugadores que mejor encajan en <?= htmlspecialchars($equipo["nombre"]) ?></h2>
         <table>
             <tr><th>#</th><th>Jugador</th><th>Pos.</th><th>Club actual</th><th>Valor</th><th>Fit</th></tr>
             <?php $pos = $inicio + 1; foreach ($rankingPagina as $j): ?>
@@ -88,10 +88,10 @@ if (isset($_GET["equipo"]) && $_GET["equipo"] != "") {
                 <td><?= $pos++ ?></td>
                 <td>
                     <span class="avatar"><?= $ini ?></span>
-                    <a href="jugador.php?id=<?= $j["id_jugador"] ?>"><?= $j["nombre"] ?></a>
+                    <a href="jugador.php?id=<?= $j["id_jugador"] ?>"><?= htmlspecialchars($j["nombre"]) ?></a>
                 </td>
-                <td><?= $j["posicion"] ?></td>
-                <td><?= $j["equipo_actual"] ?></td>
+                <td><?= htmlspecialchars($j["posicion"]) ?></td>
+                <td><?= htmlspecialchars($j["equipo_actual"]) ?></td>
                 <td><?= number_format($j["valor_mercado"], 0, ',', '.') ?> €</td>
                 <td><strong style="color: <?= $color ?>"><?= $j["fit"] ?>%</strong></td>
             </tr>

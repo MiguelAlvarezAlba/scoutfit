@@ -19,16 +19,16 @@ if (!$equipo) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?= $equipo["nombre"] ?> - Scouting</title>
+    <title><?= htmlspecialchars($equipo["nombre"]) ?> - Scouting</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <h1><?= $equipo["nombre"] ?></h1>
+    <h1><?= htmlspecialchars($equipo["nombre"]) ?></h1>
     <a href="equipos.php">← Volver al listado</a>
-    <p><strong>División:</strong> <?= $equipo["division"] ?></p>
-    <p><strong>Objetivo:</strong> <?= $equipo["objetivo"] ?></p>
-    <p><strong>Política de edad:</strong> <?= $equipo["politica_edad"] ?></p>
-    <p><strong>Estilo de juego:</strong> <?= $equipo["estilo_juego"] ?></p>
+    <p><strong>División:</strong> <?= htmlspecialchars($equipo["division"]) ?></p>
+    <p><strong>Objetivo:</strong> <?= htmlspecialchars($equipo["objetivo"]) ?></p>
+    <p><strong>Política de edad:</strong> <?= htmlspecialchars($equipo["politica_edad"]) ?></p>
+    <p><strong>Estilo de juego:</strong> <?= htmlspecialchars($equipo["estilo_juego"]) ?></p>
     <p><strong>Jugadores:</strong></p>
     <ul>
     <?php
@@ -40,7 +40,7 @@ if (!$equipo) {
     $stmt->execute();
     $jugadores = $stmt->get_result();
     while ($jugador = $jugadores->fetch_assoc()) {
-        echo "<li><a href='jugador.php?id=" . $jugador["id_jugador"] . "'>" . $jugador["nombre"] . "</a></li>";
+        echo "<li><a href='jugador.php?id=" . $jugador["id_jugador"] . "'>" . htmlspecialchars($jugador["nombre"]) . "</a></li>";
     }
     ?>
     </ul>

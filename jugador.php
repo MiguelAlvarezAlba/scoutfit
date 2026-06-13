@@ -32,7 +32,7 @@ $iniciales = mb_substr($partes[0], 0, 1) . mb_substr(end($partes), 0, 1);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?= $jugador["nombre"] ?> - ScoutFit</title>
+    <title><?= htmlspecialchars($jugador["nombre"]) ?> - ScoutFit</title>
     <link rel="stylesheet" href="css/estilos.css?v=4">
 </head>
 <body>
@@ -47,8 +47,8 @@ $iniciales = mb_substr($partes[0], 0, 1) . mb_substr(end($partes), 0, 1);
     <div class="ficha-cabecera">
         <span class="avatar avatar-grande"><?= $iniciales ?></span>
         <div>
-            <h1><?= $jugador["nombre"] ?></h1>
-            <p class="subtitulo"><?= $jugador["posicion"] ?> · <?= $jugador["equipo"] ?></p>
+            <h1><?= htmlspecialchars($jugador["nombre"]) ?></h1>
+            <p class="subtitulo"><?= htmlspecialchars($jugador["posicion"]) ?> · <?= htmlspecialchars($jugador["equipo"]) ?></p>
         </div>
     </div>
 
@@ -57,10 +57,10 @@ $iniciales = mb_substr($partes[0], 0, 1) . mb_substr(end($partes), 0, 1);
 
         <div class="ficha-datos">
             <div class="dato"><span>Edad</span><strong><?= $jugador["edad"] ?> años</strong></div>
-            <div class="dato"><span>Nacionalidad</span><strong><?= $jugador["nacionalidad"] ?></strong></div>
+            <div class="dato"><span>Nacionalidad</span><strong><?= htmlspecialchars($jugador["nacionalidad"]) ?></strong></div>
             <div class="dato"><span>Altura</span><strong><?= $jugador["altura"] ?> cm</strong></div>
-            <div class="dato"><span>Pie bueno</span><strong><?= $jugador["pie_bueno"] ?></strong></div>
-            <div class="dato"><span>Estilo</span><strong><?= $jugador["estilo"] ?></strong></div>
+            <div class="dato"><span>Pie bueno</span><strong><?= htmlspecialchars($jugador["pie_bueno"]) ?></strong></div>
+            <div class="dato"><span>Estilo</span><strong><?= htmlspecialchars($jugador["estilo"]) ?></strong></div>
             <div class="dato"><span>Valor de mercado</span><strong><?= number_format($jugador["valor_mercado"], 0, ',', '.') ?> €</strong></div>
             <div class="dato"><span>Salario</span><strong><?= number_format($jugador["salario"], 0, ',', '.') ?> €</strong></div>
             <div class="dato"><span>Fin de contrato</span><strong><?= $jugador["fin_contrato"] ?></strong></div>
@@ -80,8 +80,8 @@ $iniciales = mb_substr($partes[0], 0, 1) . mb_substr(end($partes), 0, 1);
             <tr><th>Temporada</th><th>Club</th><th>Partidos</th><th>Goles</th><th>Asist.</th><th>Nota</th></tr>
             <?php while ($t = $trayectoria->fetch_assoc()): ?>
             <tr>
-                <td><?= $t["temporada"] ?></td>
-                <td><?= $t["club"] ?></td>
+                <td><?= htmlspecialchars($t["temporada"]) ?></td>
+                <td><?= htmlspecialchars($t["club"]) ?></td>
                 <td><?= $t["partidos"] ?></td>
                 <td><?= $t["goles"] ?></td>
                 <td><?= $t["asistencias"] ?></td>

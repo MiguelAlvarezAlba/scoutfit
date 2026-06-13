@@ -19,11 +19,11 @@ $resultado = $conexion->query("SELECT * FROM equipos ORDER BY nombre");
         </tr>
         <?php while ($equipo = $resultado->fetch_assoc()): ?>
         <tr>
-            <td><a href="equipo.php?id=<?= $equipo["id_equipo"] ?>"><?= $equipo["nombre"] ?></a></td>          
-            <td><?= $equipo["division"] ?></td>
-            <td><?= $equipo["objetivo"] ?></td>
-            <td><?= $equipo["politica_edad"] ?></td>
-            <td><?= $equipo["estilo_juego"] ?></td>
+            <td><a href="equipo.php?id=<?= $equipo["id_equipo"] ?>"><?= htmlspecialchars($equipo["nombre"]) ?></a></td>
+            <td><?= htmlspecialchars($equipo["division"]) ?></td>
+            <td><?= htmlspecialchars($equipo["objetivo"]) ?></td>
+            <td><?= htmlspecialchars($equipo["politica_edad"]) ?></td>
+            <td><?= htmlspecialchars($equipo["estilo_juego"]) ?></td>
         </tr>
         <?php endwhile; ?>
     </table>
