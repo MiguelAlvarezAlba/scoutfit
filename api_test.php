@@ -2,7 +2,7 @@
 require "includes/api_config.php";
 
 // 1. Preparar la llamada a la API
-$ch = curl_init("https://" . API_FOOTBALL_HOST . "/players/squads?team=531");
+$ch = curl_init("https://" . API_FOOTBALL_HOST . "/leagues?country=Spain");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "x-apisports-key: " . API_FOOTBALL_KEY

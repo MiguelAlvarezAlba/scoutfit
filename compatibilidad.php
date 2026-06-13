@@ -13,6 +13,7 @@ $listaEquipos   = $conexion->query("SELECT id_equipo, nombre FROM equipos ORDER 
 
 // EJEMPLO RESUELTO (mío): encaje económico
 function notaEconomica($jugador, $equipo) {
+    if ($equipo["presupuesto"] <= 0) return 50;   // presupuesto desconocido: nota neutra
     $porcentaje = $jugador["valor_mercado"] / $equipo["presupuesto"] * 100;
 
     if ($porcentaje <= 10) return 100;  // compra cómoda
