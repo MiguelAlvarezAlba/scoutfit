@@ -1,0 +1,261 @@
+/* ===== Base ===== */
+body {
+    background-color: #10141d;          /* fondo oscuro tipo FM */
+    color: #e8e8e8;                      /* texto claro */
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px;   /* aire arriba/abajo y a los lados */
+}
+
+h1 {
+    color: #00913e;                      /* verde césped, el color de acento */
+    border-bottom: 3px solid #00913e;
+    padding-bottom: 10px;
+}
+
+/* ===== Tabla ===== */
+table {
+    border-collapse: collapse;           /* sin esto, bordes dobles feos */
+    width: 100%;
+    background-color: #1a2030;           /* panel un poco más claro que el fondo */
+    border-radius: 8px;
+    overflow: hidden;                    /* para que el radius recorte la tabla */
+}
+table a { color: #e8e8e8; text-decoration: none; }
+table a:hover { color: #2dd486; }
+
+th {
+    background-color: #00913e;           /* cabecera en el color de acento */
+    color: #10141d;                      /* texto oscuro sobre verde */
+    padding: 12px 16px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #2a3247;    /* línea sutil entre filas */
+}
+
+tr:nth-child(even) td {
+    background-color: #202738;           /* filas alternadas */
+}
+
+tr:hover td {
+    background-color: #2a3850;           /* resalta la fila al pasar el ratón */
+}
+/* ===== Menú de navegación ===== */
+nav {
+    background-color: #1a2030;        /* fondo del panel (mira el de tus tablas) */
+    padding: 12px 20px;                 /* aire interior, ej. 12px 20px */
+    display: flex;                /* pone los enlaces en fila */
+    gap: 25px;                     /* separación entre enlaces, ej. 25px */
+    justify-content: space-around;
+}
+
+nav a {
+    color: #e8e8e8;                   /* color del texto de los enlaces */
+    text-decoration: none;        /* fuera el subrayado feo */
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #00913e;                   /* tu verde de acento al pasar el ratón */
+}
+
+/* ===== Tarjetas de la portada ===== */
+.tarjetas {
+    list-style: none;             /* fuera los puntitos del ul */
+    padding: 0;
+    display: flex;                /* las tres en fila */
+    gap: 25px;                     /* separación entre tarjetas */
+}
+
+.tarjetas li {
+    background-color: #1a2030;        /* fondo de panel */
+    border-radius: 10px;           /* esquinas redondeadas, ej. 10px */
+    transition: 0.2s;             /* suaviza el hover (regalo: queda pro) */
+}
+
+.tarjetas li:hover {
+    background-color: #2a3247;        /* un pelín más claro al pasar */
+    transform: translateY(-3px);  /* regalo: la tarjeta "levita" */
+}
+
+.tarjetas a {
+    display: block;               /* TODA la tarjeta clicable, no solo el texto */
+    padding: 30px 25px;                 /* aire generoso, ej. 30px 25px */
+    color: #e8e8e8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.avatar {
+    display: inline-block;
+    width: 40px; height: 40px;
+    border-radius: 50%;        /* círculo */
+    background: #2dd486;
+    color: #10141d;
+    text-align: center;
+    line-height: 40px;         /* centra la letra en vertical */
+    font-weight: bold;
+}
+.desglose {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;   /* arriba alineados, no estirados */
+    
+}
+
+.desglose table { flex: 1; }     /* mitad para la tabla */
+.desglose .grafico { flex: 1; }  /* mitad para el gráfico */
+.desglose .grafico {
+    flex: 1.5;            /* más ancho que la tabla */
+    height: 400px;        /* ← la altura que mandará sobre el gráfico */
+    position: relative;   /* Chart.js lo necesita para redimensionar bien */
+}
+nav .logo {
+    color: #2dd486;
+    font-size: 18px;
+}
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;   /* 3 columnas iguales */
+    gap: 16px;                            /* aire entre campos */
+    background-color: #1a2030;            /* panel */
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 1000px;
+}
+
+/* Cada campo (label + input) en su celda, apilados */
+.formulario label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #2dd486;
+}
+
+/* El botón ocupa las 3 columnas, abajo del todo */
+.formulario button {
+    grid-column: 1 / -1;     /* de la primera a la última columna */
+    justify-self: start;     /* alineado a la izquierda */
+}
+.formulario .campo {
+    display: flex;
+    flex-direction: column;   /* label arriba, input debajo */
+}
+
+.formulario .campo input,
+.formulario .campo select {
+    width: 100%;              /* el input llena su celda */
+    box-sizing: border-box;   /* que el padding no lo desborde */
+}
+
+/* ===== Ficha de jugador ===== */
+.acciones-ficha {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.ficha-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #1a2030;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #2dd486;   /* franja de acento */
+}
+
+.ficha-cabecera h1 { margin: 0; }
+
+.ficha-cabecera .subtitulo {
+    margin: 4px 0 0;
+    color: #9aa3b2;
+    font-size: 16px;
+}
+
+.avatar-grande {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 26px;
+}
+
+.ficha-cuerpo {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    margin-top: 25px;
+}
+
+.ficha-datos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dato {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background-color: #1a2030;
+    border-radius: 8px;
+}
+
+.dato span { color: #9aa3b2; }       /* etiqueta gris */
+.dato strong { color: #e8e8e8; }     /* valor claro */
+
+.ficha-radar {
+    flex: 1;
+    background-color: #1a2030;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.ficha-seccion {
+    margin-top: 30px;
+}
+
+.ficha-seccion h2 {
+    color: #2dd486;
+    border-bottom: 2px solid #2a3247;
+    padding-bottom: 8px;
+}
+
+.sin-datos {
+    color: #9aa3b2;
+    font-style: italic;
+}
+
+/* ===== Paginación ===== */
+.paginacion {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.paginacion a,
+.paginacion .pagina-actual {
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #1a2030;
+    color: #e8e8e8;
+    text-decoration: none;
+}
+
+.paginacion .pagina-actual {
+    background-color: #2dd486;   /* la página en la que estás, resaltada */
+    color: #10141d;
+    font-weight: bold;
+}

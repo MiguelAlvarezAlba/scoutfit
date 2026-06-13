@@ -1,0 +1,17 @@
+# Archivos que Git debe IGNORAR (no subir al repositorio)
+
+# Configuración local del editor
+.vscode/
+.idea/
+
+# Archivos temporales del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs
+*.log
+
+# Copias de seguridad
+*.bak
+*.sql.bak
