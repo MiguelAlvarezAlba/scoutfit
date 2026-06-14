@@ -1,6 +1,7 @@
 <?php
 require "includes/conexion.php";
 require "includes/sesion.php";
+require_once "includes/roles.php";
 requerirLogin();
 
 // Equipos para el desplegable
@@ -15,10 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idEquipo = $_POST["equipo"] ?: null;
 
     $stmt = $conexion->prepare(
-        "INSERT INTO jugadores (id_equipo, nombre, fecha_nac, nacionalidad, posicion, pie_bueno, altura, valor_mercado, salario, fin_contrato, estilo, liderazgo, disciplina, compromiso)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO jugadores (id_equipo, nombre, fecha_nac, nacionalidad, posicion, pie_bueno, altura, valor_mercado, salario, fin_contrato, estilo, liderazgo, disciplina, compromiso, rol, posiciones_sec)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
-    $stmt->bind_param("isssssiddssiii",
+    $stmt->bind_param("isssssiddssiiiss",
         $idEquipo,
         $_POST["nombre"],
         $_POST["fecha_nac"],
@@ -32,7 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST["estilo"],
         $_POST["liderazgo"],
         $_POST["disciplina"],
-        $_POST["compromiso"]
+        $_POST["compromiso"],
+        $_POST["rol"],
+        $_POST["posiciones_sec"]
     );
     $stmt->execute();
 
@@ -79,6 +82,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="Centrocampista">Centrocampista</option>
                 <option value="Delantero">Delantero</option>
             </select>
+        </div>
+
+        <div class="campo">
+            <label>Rol</label>
+            <select name="rol">
+                <option value="">-- Sin rol --</option>
+                <?php foreach ($ROLES as $grupo => $roles): ?>
+                <optgroup label="<?= $grupo ?>">
+                    <?php foreach ($roles as $rol): ?>
+                    <option value="<?= $rol ?>"><?= $rol ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label>Posiciones secundarias</label>
+            <input type="text" name="posiciones_sec" placeholder="Ej. Extremo izq, Mediapunta">
         </div>
 
         <div class="campo">

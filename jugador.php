@@ -61,6 +61,8 @@ $iniciales = mb_substr($partes[0], 0, 1) . mb_substr(end($partes), 0, 1);
             <div class="dato"><span>Altura</span><strong><?= $jugador["altura"] ?> cm</strong></div>
             <div class="dato"><span>Pie bueno</span><strong><?= htmlspecialchars($jugador["pie_bueno"]) ?></strong></div>
             <div class="dato"><span>Estilo</span><strong><?= htmlspecialchars($jugador["estilo"]) ?></strong></div>
+            <div class="dato"><span>Rol</span><strong><?= $jugador["rol"] ? htmlspecialchars($jugador["rol"]) : "—" ?></strong></div>
+            <div class="dato"><span>Posiciones secundarias</span><strong><?= $jugador["posiciones_sec"] ? htmlspecialchars($jugador["posiciones_sec"]) : "—" ?></strong></div>
             <div class="dato"><span>Valor de mercado</span><strong><?= number_format($jugador["valor_mercado"], 0, ',', '.') ?> €</strong></div>
             <div class="dato"><span>Salario</span><strong><?= number_format($jugador["salario"], 0, ',', '.') ?> €</strong></div>
             <div class="dato"><span>Fin de contrato</span><strong><?= $jugador["fin_contrato"] ?></strong></div>

@@ -1,6 +1,7 @@
 <?php
 require "includes/conexion.php";
 require "includes/sesion.php";
+require_once "includes/roles.php";
 requerirLogin();
 
 $id = $_GET["id"];
@@ -19,10 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "UPDATE jugadores SET
             id_equipo = ?, nombre = ?, fecha_nac = ?, nacionalidad = ?, posicion = ?,
             pie_bueno = ?, altura = ?, valor_mercado = ?, salario = ?, fin_contrato = ?,
-            estilo = ?, liderazgo = ?, disciplina = ?, compromiso = ?
+            estilo = ?, liderazgo = ?, disciplina = ?, compromiso = ?, rol = ?, posiciones_sec = ?
          WHERE id_jugador = ?"
     );
-    $stmt->bind_param("isssssiddssiiii",
+    $stmt->bind_param("isssssiddssiiissi",
         $idEquipo,
         $_POST["nombre"],
         $_POST["fecha_nac"],
@@ -37,6 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST["liderazgo"],
         $_POST["disciplina"],
         $_POST["compromiso"],
+        $_POST["rol"],
+        $_POST["posiciones_sec"],
         $id
     );
     $stmt->execute();
@@ -93,6 +96,25 @@ if (!$jugador) {
                 <option value="Centrocampista" <?= $jugador["posicion"] == "Centrocampista" ? "selected" : "" ?>>Centrocampista</option>
                 <option value="Delantero" <?= $jugador["posicion"] == "Delantero" ? "selected" : "" ?>>Delantero</option>
             </select>
+        </div>
+
+        <div class="campo">
+            <label>Rol</label>
+            <select name="rol">
+                <option value="">-- Sin rol --</option>
+                <?php foreach ($ROLES as $grupo => $roles): ?>
+                <optgroup label="<?= $grupo ?>">
+                    <?php foreach ($roles as $rol): ?>
+                    <option value="<?= $rol ?>" <?= ($jugador["rol"] ?? "") == $rol ? "selected" : "" ?>><?= $rol ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label>Posiciones secundarias</label>
+            <input type="text" name="posiciones_sec" value="<?= htmlspecialchars($jugador["posiciones_sec"] ?? "") ?>" placeholder="Ej. Extremo izq, Mediapunta">
         </div>
 
         <div class="campo">

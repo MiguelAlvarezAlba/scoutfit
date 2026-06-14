@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/roles.php";   // afinidad rol -> estilo (función rolAEstilo)
+
 /* ============================================================
    MOTOR DE COMPATIBILIDAD — reutilizable
    Las 5 dimensiones devuelven una nota de 0 a 100.
@@ -14,18 +16,45 @@ function notaEconomica($jugador, $equipo) {
 }
 
 function notaDeportiva($jugador, $equipo) {
+
+    // --- 1. Encaje de ESTILO ---
     $estiloJugador = $jugador["estilo"];
-    $estiloClub = $equipo["estilo_juego"];
+    $estiloClub    = $equipo["estilo_juego"];
 
-    if ($estiloJugador == $estiloClub) return 100;            // mismo estilo
+    if ($estiloJugador == $estiloClub) {
+        $notaEstilo = 100;                                    // mismo estilo
+    } elseif (
+        ($estiloJugador == "posesion"     && $estiloClub == "presion alta") ||
+        ($estiloJugador == "presion alta" && $estiloClub == "posesion")     ||
+        ($estiloJugador == "contraataque" && $estiloClub == "directo")      ||
+        ($estiloJugador == "directo"      && $estiloClub == "contraataque")
+    ) {
+        $notaEstilo = 65;                                     // estilos "primos"
+    } else {
+        $notaEstilo = 15;                                     // chocan
+    }
 
-    // estilos "primos" (en ambos sentidos)
-    if ($estiloJugador == "posesion" && $estiloClub == "presion alta") return 65;
-    if ($estiloJugador == "presion alta" && $estiloClub == "posesion") return 65;
-    if ($estiloJugador == "contraataque" && $estiloClub == "directo") return 65;
-    if ($estiloJugador == "directo" && $estiloClub == "contraataque") return 65;
+    // --- 2. Encaje de NECESIDAD DE POSICIÓN ---
+    $buscada = $equipo["posicion_buscada"] ?? "cualquiera";
 
-    return 15;                                                // chocan
+    if ($buscada == "cualquiera") {
+        $notaPosicion = 70;                                   // el club no busca posición concreta
+    } elseif ($jugador["posicion"] == $buscada) {
+        $notaPosicion = 100;                                  // cubre la necesidad de titular
+    } elseif (strpos($jugador["posiciones_sec"] ?? "", $buscada) !== false) {
+        $notaPosicion = 75;                                   // la cubre como secundaria
+    } else {
+        $notaPosicion = 20;                                   // no cubre lo que el club busca
+    }
+
+    // --- 3. Bonus por ROL afín al estilo del club ---
+    // Si el rol del jugador "pide" el mismo estilo que juega el club, +10.
+    $estiloDelRol = rolAEstilo($jugador["rol"] ?? "");
+    $bonusRol = ($estiloDelRol !== null && $estiloDelRol == $estiloClub) ? 10 : 0;
+
+    // --- 4. Combinar: mitad estilo, mitad posición, + bonus de rol (tope 100) ---
+    $nota = $notaEstilo * 0.5 + $notaPosicion * 0.5 + $bonusRol;
+    return min($nota, 100);
 }
 
 function notaEdad($jugador, $equipo) {

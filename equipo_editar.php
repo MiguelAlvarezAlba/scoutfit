@@ -11,10 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conexion->prepare(
         "UPDATE equipos SET
             nombre = ?, ciudad = ?, division = ?, presupuesto = ?,
-            estilo_juego = ?, objetivo = ?, politica_edad = ?, caracter = ?, valores = ?
+            estilo_juego = ?, objetivo = ?, politica_edad = ?, caracter = ?, valores = ?, posicion_buscada = ?
          WHERE id_equipo = ?"
     );
-    $stmt->bind_param("sssdsssssi",
+    $stmt->bind_param("sssdssssssi",
         $_POST["nombre"],
         $_POST["ciudad"],
         $_POST["division"],
@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST["politica_edad"],
         $_POST["caracter"],
         $_POST["valores"],
+        $_POST["posicion_buscada"],
         $id
     );
     $stmt->execute();
@@ -127,6 +128,17 @@ function sel($valor, $actual) {
         <div class="campo">
             <label>Valores</label>
             <input type="text" name="valores" value="<?= htmlspecialchars($equipo["valores"]) ?>">
+        </div>
+
+        <div class="campo">
+            <label>Posición que busca reforzar</label>
+            <select name="posicion_buscada">
+                <option value="cualquiera" <?= sel("cualquiera", $equipo["posicion_buscada"]) ?>>Cualquiera</option>
+                <option value="Portero" <?= sel("Portero", $equipo["posicion_buscada"]) ?>>Portero</option>
+                <option value="Defensa" <?= sel("Defensa", $equipo["posicion_buscada"]) ?>>Defensa</option>
+                <option value="Centrocampista" <?= sel("Centrocampista", $equipo["posicion_buscada"]) ?>>Centrocampista</option>
+                <option value="Delantero" <?= sel("Delantero", $equipo["posicion_buscada"]) ?>>Delantero</option>
+            </select>
         </div>
 
         <button type="submit">Guardar cambios</button>
